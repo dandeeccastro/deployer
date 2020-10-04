@@ -2,6 +2,7 @@ import React from 'react';
 import blessed from 'blessed';
 import {render} from 'react-blessed';
 
+// Log das operações que são executadas pelo programa
 class Log extends React.Component {
 	constructor(props) {
 		super(props);
@@ -10,18 +11,23 @@ class Log extends React.Component {
 		}
 	}
 
+	componentDidMount() {
+		setInterval(() => {
+			this.state.log.push("Mais uma linha") 
+		},1000)
+	}
+
 	render() {
 		return (
+			// OK porque isso não imprime quatro aaas? 
 			<box label="Log" width="70%" height="80%" border={{type: 'line'}} style={{border:{fg:'blue'}}}> 
-				<text>AAAAAAAAAAAAAA</text>
-				<text>AAAAAAAAAAAAAA</text>
-				<text>AAAAAAAAAAAAAA</text>
-				<text>AAAAAAAAAAAAAA</text>
+				<log ref='main_log'>AAAAAAAAAA</log>
 			</box>
 		);
 	}
 }
 
+// Lista de itens do item escolhido para o deploy
 class Pipeline extends React.Component {
 	render() {
 		return(
@@ -30,6 +36,7 @@ class Pipeline extends React.Component {
 	}
 }
 
+// Caixa com botões para ações de deploy
 class ActionBox extends React.Component {
 	constructor(props) {
 		super(props);
